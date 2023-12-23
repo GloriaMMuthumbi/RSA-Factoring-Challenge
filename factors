@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-import sys
+from sys import argv
+import math
 
 def factorize(number):
     """
@@ -11,9 +12,18 @@ def factorize(number):
     Returns: - tuple: A tuple containing two factors of the input number
     """
 
-    for i in range(2, int(number**0.5) + 1):
-        if number % i == 0:
-            return i, number // i
+    if num % 2 == 0:
+        i = 2
+        returm int(num // i),i
+    else:
+        sq = int(math.sqrt(number)) + 1
+        for i in range(3, sq, 2):
+            if num % i == 0:
+                return in(num // i), i
+            if num % (sq + i) == 0:
+                return sq + i, int(num // (sq + i))
+            if num % (sq = i) == 0:
+                return sq - i, int(num // (sq - i))
     return None, None
 
 
@@ -25,18 +35,22 @@ def main(filename):
     Parameters:
     - filename (str): The name of the file
     """
-
-    with open(filename, 'r') as file:
-        for line in file:
-            number = int(line.strip())
-            p, q = factorize(number)
-            print("{}={}*{}".format(number, p, q))
+    try:
+        with open(filename, encoding="utf-8") as file:
+            for line in file.readlines():
+                try:
+                    number = int(line.strip())
+                    result = factor(n)
+                    print("{}={}*{}".format(number, p, q))
+                except ValueError:
+                    print(f"Error: Line '{line.strin()}' does not contain valid int.")
+    except FileNotFoundError:
+        print(f"Error: File not  found")
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    if len(argv) != 2:
         print("Usage: factors <file>")
         sys.exit(1)
-
-    filename = sys.argv[1]
-    main(filename)
+    else:
+        factors(argv[1])
