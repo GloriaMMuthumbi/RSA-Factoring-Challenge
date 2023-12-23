@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from sys import argv
+from sys 
 import math
 
 def factorize(number):
@@ -43,13 +43,13 @@ def main(filename):
                     result = factorize(number)
                     print("{}={}*{}".format(number, result[0], result[1]))
                 except ValueError:
-                    print(f"Error: Line '{line.strin()}' does not contain valid int.")
+                    print(f"Error: Line '{line.string()}' does not contain valid int.")
     except FileNotFoundError:
         print(f"Error: File not  found")
 
 
 if __name__ == "__main__":
-    if len(argv) != 2:
+    if len(sys.argv) != 2:
         print("Usage: factors <file>")
         sys.exit(1)
     else:
