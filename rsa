@@ -1,0 +1,73 @@
+#!/usr/bin/python3
+import sys
+import math
+
+def is_prime(number):
+    """
+    Checks if number is a prime number
+
+    Parameter:
+    - number (int): The number to be checked
+
+    Return: boolean: a boolean of true or false
+    """
+    if number < 2:
+        return False
+    for i in range(2, int(math.sqrt(number)) + 1):
+        if number % i == 0:
+            return False
+    return True
+
+def factorize(number):
+    """
+    Factorizes a given number
+
+    Parameter:
+    - number (int): The number to be factorized.
+
+    Returns: - tuple: A tuple containing two factors of the input number
+    """
+
+    if number % 2 == 0:
+        i = 2
+        if is_prime(number // i):
+            return i, number // i
+    else:
+        sq = int(math.sqrt(number)) + 1
+        for i in range(3, sq, 2):
+            if number % i == 0:
+                return int(number // i), i
+            if number % (sq + i) == 0:
+                return sq + i, int(number // (sq + i))
+            if number % (sq - i) == 0:
+                return sq - i, int(number // (sq - i))
+    return None, None
+
+
+def main(filename):
+    """
+    Main function to read file containing numbers and output
+    the factorization
+
+    Parameters:
+    - filename (str): The name of the file
+    """
+    try:
+        with open(filename, encoding="utf-8") as file:
+            for line in file.readlines():
+                try:
+                    number = int(line.strip())
+                    result = factorize(number)
+                    print("{}={}*{}".format(number, result[0], result[1]))
+                except ValueError:
+                    print(f"Error: Line '{line.string()}' does not contain valid int.")
+    except FileNotFoundError:
+        print(f"Error: File not  found")
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: factors <file>")
+        sys.exit(1)
+    else:
+        main(sys.argv[1])
