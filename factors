@@ -12,18 +12,18 @@ def factorize(number):
     Returns: - tuple: A tuple containing two factors of the input number
     """
 
-    if num % 2 == 0:
+    if number % 2 == 0:
         i = 2
-        returm int(num // i),i
+        return int(number // i),i
     else:
         sq = int(math.sqrt(number)) + 1
         for i in range(3, sq, 2):
-            if num % i == 0:
-                return in(num // i), i
-            if num % (sq + i) == 0:
-                return sq + i, int(num // (sq + i))
-            if num % (sq = i) == 0:
-                return sq - i, int(num // (sq - i))
+            if number % i == 0:
+                return int(number // i), i
+            if number % (sq + i) == 0:
+                return sq + i, int(number // (sq + i))
+            if number % (sq - i) == 0:
+                return sq - i, int(number // (sq - i))
     return None, None
 
 
@@ -40,8 +40,8 @@ def main(filename):
             for line in file.readlines():
                 try:
                     number = int(line.strip())
-                    result = factor(n)
-                    print("{}={}*{}".format(number, p, q))
+                    result = factorize(number)
+                    print("{}={}*{}".format(number, result[0], result[1]))
                 except ValueError:
                     print(f"Error: Line '{line.strin()}' does not contain valid int.")
     except FileNotFoundError:
@@ -53,4 +53,4 @@ if __name__ == "__main__":
         print("Usage: factors <file>")
         sys.exit(1)
     else:
-        factors(argv[1])
+        main(argv[1])
