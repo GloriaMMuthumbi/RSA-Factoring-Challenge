@@ -2,19 +2,36 @@
 import sys
 import math
 
+def is_prime(number):
+    """
+    Checks if number is a prime number
+
+    Parameter:
+    - number (int): The number to be checked
+
+    Return: boolean: a boolean of true or false
+    """
+    if number < 2:
+        return False
+    for i in range(2, int(math.sqrt(number)) + 1):
+        if number % i == 0:
+            return False
+    return True
+
 def factorize(number):
     """
     Factorizes a given number
 
     Parameter:
-    - number (int): The number to be facotrized.
+    - number (int): The number to be factorized.
 
     Returns: - tuple: A tuple containing two factors of the input number
     """
 
     if number % 2 == 0:
         i = 2
-        return int(number // i),i
+        if is_prime(number // i):
+            return i, number // i
     else:
         sq = int(math.sqrt(number)) + 1
         for i in range(3, sq, 2):
